@@ -4,12 +4,12 @@ import styled from '@emotion/styled';
 
 const LanguageSelectorContainer = styled.div`
   position: fixed;
-  top: 20px;
+  top: 80px;  /* Increased from 20px to 80px */
   right: 20px;
   z-index: 1000;
   
   @media (max-width: 768px) {
-    top: 15px;
+    top: 70px;  /* Increased from 15px to 70px */
     right: 15px;
   }
 `;
