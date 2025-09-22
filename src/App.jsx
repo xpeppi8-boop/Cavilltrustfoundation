@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Global, css } from '@emotion/react';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n';
 import Home from './components/Home/Home';
 import Fan from './components/Home/Fan';
+import LanguageSelector from './components/LanguageSelector/LanguageSelector';
 
 // Global styles
 const globalStyles = css`
@@ -46,16 +49,19 @@ const globalStyles = css`
 
 const App = () => {
   return (
-    <Router>
-      <Global styles={globalStyles} />
-      <div className="app">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/fan" element={<Fan />} />
-          {/* Add more routes as needed */}
-        </Routes>
-      </div>
-    </Router>
+    <I18nextProvider i18n={i18n}>
+      <Router>
+        <Global styles={globalStyles} />
+        <LanguageSelector />
+        <div className="app">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/fan" element={<Fan />} />
+            {/* Add more routes as needed */}
+          </Routes>
+        </div>
+      </Router>
+    </I18nextProvider>
   );
 };
 

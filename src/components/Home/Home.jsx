@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -299,44 +300,38 @@ const ReasonCard = styled.div`
 
 const reasons = [
   {
-    title: 'Founded on Integrity',
-    desc:
-      "The Henry Cavill Foundation is built on values of honesty, responsibility, and compassion — the same principles Henry has demonstrated throughout his career and personal life.",
+    title: t('reasons.integrity.title'),
+    desc: t('reasons.integrity.desc'),
     icon: 'fa-shield-alt',
     color: '#1e3a8a',
   },
   {
-    title: 'Personal Commitment',
-    desc:
-      "Henry’s philanthropy is not just financial — he actively participates in fundraising events, fitness challenges, and awareness campaigns. Your support goes hand-in-hand with his personal dedication.",
+    title: t('reasons.commitment.title'),
+    desc: t('reasons.commitment.desc'),
     icon: 'fa-hand-holding-heart',
     color: '#0ea5e9',
   },
   {
-    title: 'Supporting Heroes and Wildlife',
-    desc:
-      "From aiding military veterans and their families through the Royal Marines Charity, to protecting endangered species with the Durrell Wildlife Conservation Trust, every contribution makes a lasting impact on both people and the planet.",
+    title: t('reasons.heroes.title'),
+    desc: t('reasons.heroes.desc'),
     icon: 'fa-paw',
     color: '#16a34a',
   },
   {
-    title: 'Global Awareness, Local Impact',
-    desc:
-      "With a global fanbase and trusted partnerships, the Foundation raises awareness on an international stage while funding projects that deliver real, measurable change in communities.",
+    title: t('reasons.impact.title'),
+    desc: t('reasons.impact.desc'),
     icon: 'fa-globe',
     color: '#f59e0b',
   },
   {
-    title: 'Transparency You Can Trust',
-    desc:
-      "Every donation is handled with care and accountability. We believe in showing you where your support goes and how it transforms lives.",
+    title: t('reasons.transparency.title'),
+    desc: t('reasons.transparency.desc'),
     icon: 'fa-scale-balanced',
     color: '#8b5cf6',
   },
   {
-    title: 'Inspired by Passion, Driven by Action',
-    desc:
-      "This is more than a name on a charity — it’s a movement inspired by Henry’s passion for service, conservation, and community. Together, we can build a brighter future.",
+    title: t('reasons.passion.title'),
+    desc: t('reasons.passion.desc'),
     icon: 'fa-fire',
     color: '#ef4444',
   },
@@ -612,6 +607,7 @@ const FanClubGrid = styled.div`
 `;
 
 const Home = () => {
+  const { t } = useTranslation();
   // Load Font Awesome
   loadFontAwesome();
   const navigate = useNavigate();
@@ -647,13 +643,10 @@ const Home = () => {
       
       <ContentWrapper>
         <WelcomeSection>
-          <h1>Welcome to Henry Cavill Foundation</h1>
-          <p>
-            Join us in supporting Henry Cavill's creative vision and be part of an exclusive community 
-            of fans who appreciate fine storytelling and artistic excellence.
-          </p>
+          <h1>{t('hero.welcome')}</h1>
+          <p>{t('hero.subtitle')}</p>
         </WelcomeSection>
-        <SectionHeading>Why support the Cavill Trust Foundation?</SectionHeading>
+        <SectionHeading>{t('support.title')}</SectionHeading>
         
         <ImageCarousel />
 
@@ -678,7 +671,7 @@ const Home = () => {
           ))}
         </ReasonsGrid>
 
-        <SectionHeading>Support the Foundation</SectionHeading>
+        <SectionHeading>{t('support.title')}</SectionHeading>
         {(() => {
           const goal = 30000;
           const raised = 14760;
@@ -688,7 +681,7 @@ const Home = () => {
               {!showDonateDetails ? (
                 <>
                   <p className="lead">
-                    Together we are building a community that turns compassion into impact. Your donation helps fund veteran support, wildlife conservation, and grassroots initiatives that change lives. Every contribution moves us closer to our goal.
+                    {t('support.description')}
                   </p>
 
                   <StatsRow>
@@ -697,7 +690,7 @@ const Home = () => {
                         <div className="iconBox" aria-hidden="true">
                           <i className="fas fa-bullseye"></i>
                         </div>
-                        <span className="label">Annual target</span>
+                        <span className="label">{t('support.annualTarget')}</span>
                       </div>
                       <span className="value">$30,000</span>
                     </div>
@@ -706,7 +699,7 @@ const Home = () => {
                         <div className="iconBox" aria-hidden="true">
                           <i className="fas fa-hand-holding-dollar"></i>
                         </div>
-                        <span className="label">Raised so far</span>
+                        <span className="label">{t('support.raisedSoFar')}</span>
                       </div>
                       <span className="value">$14,760</span>
                     </div>
@@ -719,11 +712,11 @@ const Home = () => {
                   </Progress>
 
                   <p className="lead" style={{ fontStyle: 'italic' }}>
-                    “When we come together, small acts become powerful change. If Henry’s work has inspired you, this is your chance to inspire others.”
+                    "{t('support.quote')}"
                   </p>
 
-                  <DonateButton type="button" aria-label="Donate to the foundation" onClick={() => setShowDonateDetails(true)}>
-                    Donate Now
+                  <DonateButton type="button" aria-label={t('support.donateButton')} onClick={() => setShowDonateDetails(true)}>
+                    {t('support.donateButton')}
                   </DonateButton>
                 </>
               ) : (
@@ -734,47 +727,47 @@ const Home = () => {
                         <div className="stat" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
                           <div className="left" style={{ alignItems: 'center', gap: 10 }}>
                             <div className="iconBox" aria-hidden="true"><i className="fas fa-gift"></i></div>
-                            <span className="label">Pay with Gift Card</span>
+                            <span className="label">{t('donation.payWithGiftCard')}</span>
                           </div>
                           <code style={{ color: '#e5e7eb', fontSize: '0.9rem', wordBreak: 'break-all' }}>cavilltrustfoundation@gmail.com</code>
-                          <CopyBtn onClick={() => copyToClipboard('cavilltrustfoundation@gmail.com')}>Copy</CopyBtn>
+                          <CopyBtn onClick={() => copyToClipboard('cavilltrustfoundation@gmail.com')}>{t('common.copy')}</CopyBtn>
                         </div>
 
                         <div className="stat" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
                           <div className="left" style={{ alignItems: 'center', gap: 10 }}>
                             <div className="iconBox" aria-hidden="true"><i className="fas fa-coins"></i></div>
-                            <span className="label">Pay with Cryptocurrency</span>
+                            <span className="label">{t('donation.payWithCrypto')}</span>
                           </div>
                           <small style={{ color: '#cbd5e1' }}>USDT (TRC20)</small>
                           <code style={{ color: '#e5e7eb', fontSize: '0.9rem', wordBreak: 'break-all' }}>TA4qRNXqqb31erxZZVHf574iA1Qm4JNMyV</code>
-                          <CopyBtn onClick={() => copyToClipboard('TA4qRNXqqb31erxZZVHf574iA1Qm4JNMyV')}>Copy</CopyBtn>
+                          <CopyBtn onClick={() => copyToClipboard('TA4qRNXqqb31erxZZVHf574iA1Qm4JNMyV')}>{t('common.copy')}</CopyBtn>
                         </div>
 
                         <div className="stat" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
                           <div className="left" style={{ alignItems: 'center', gap: 10 }}>
                             <div className="iconBox" aria-hidden="true"><i className="fab fa-bitcoin"></i></div>
-                            <span className="label">Pay with Cryptocurrency</span>
+                            <span className="label">{t('donation.payWithCrypto')}</span>
                           </div>
                           <small style={{ color: '#cbd5e1' }}>Bitcoin (BTC)</small>
                           <code style={{ color: '#e5e7eb', fontSize: '0.9rem', wordBreak: 'break-all' }}>bc1qxp4x04tvglmcjx6ct8q7tjgjk5497eacvlxg68</code>
-                          <CopyBtn onClick={() => copyToClipboard('bc1qxp4x04tvglmcjx6ct8q7tjgjk5497eacvlxg68')}>Copy</CopyBtn>
+                          <CopyBtn onClick={() => copyToClipboard('bc1qxp4x04tvglmcjx6ct8q7tjgjk5497eacvlxg68')}>{t('common.copy')}</CopyBtn>
                         </div>
                       </StatsRow>
 
                       {/* Email input moved below cards */}
                       <div className="stat" style={{ marginTop: 12, alignItems: 'center', justifyContent: 'space-between' }}>
                         <div className="left" style={{ gap: 10 }}>
-                          <span className="label">Email for receipt (optional)</span>
+                          <span className="label">{t('donation.emailLabel')}</span>
                         </div>
-                        <EmailInput type="email" placeholder="enter your email" aria-label="donor email" value={donorEmail} onChange={(e) => setDonorEmail(e.target.value)} />
+                        <EmailInput type="email" placeholder={t('donation.emailPlaceholder')} aria-label={t('donation.emailLabel')} value={donorEmail} onChange={(e) => setDonorEmail(e.target.value)} />
                       </div>
 
                       <div style={{ display: 'flex', marginTop: 12, gap: 10, justifyContent: 'flex-end' }}>
                         <ConfirmBtn type="button" onClick={() => setShowDonateDetails(false)}>
-                          Back
+                          {t('donation.backButton')}
                         </ConfirmBtn>
                         <ConfirmBtn type="button" onClick={() => setDonationComplete(true)}>
-                          I Have Donated
+                          {t('donation.confirmButton')}
                         </ConfirmBtn>
                       </div>
                     </>
@@ -783,47 +776,47 @@ const Home = () => {
                       <div className="stat" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
                         <div className="left" style={{ alignItems: 'center', gap: 10 }}>
                           <div className="iconBox" aria-hidden="true"><i className="fas fa-check-circle"></i></div>
-                          <span className="label">Thank you for your donation!</span>
+                          <span className="label">{t('donation.thankYou')}</span>
                         </div>
                         <p style={{ color: '#e5e7eb' }}>
-                          A confirmation email will be sent {donorEmail ? `to ${donorEmail}` : 'to your email'}.
+                          {t('donation.confirmationMessage', { email: donorEmail ? t('donation.toEmail', { email: donorEmail }) : t('donation.toYourEmail') })}
                         </p>
                       </div>
 
                       <div style={{ display: 'flex', marginTop: 12, gap: 10, justifyContent: 'flex-end' }}>
                         <ConfirmBtn type="button" onClick={() => { setDonationComplete(false); setShowDonateDetails(false); } }>
-                          Done
+                          {t('common.done')}
                         </ConfirmBtn>
                       </div>
                     </>
                   )}
                 </>
               )}
-            </SupportSection><SectionHeading style={{ marginTop: '60px' }}>Join the Fan Club</SectionHeading><FanClubGrid>
+            </SupportSection><SectionHeading style={{ marginTop: '60px' }}>{t('fanClub.title')}</SectionHeading><FanClubGrid>
                 <FanClubCard>
                   <img src={cavill1} alt="Henry Cavill" className="card-image" />
                   <div className="card-content">
-                    <h3 className="card-title">Exclusive Content</h3>
-                    <p className="card-text">Get access to behind-the-scenes photos, videos, and personal updates from Henry that you won't find anywhere else.</p>
-                    <button onClick={handleJoinNow} className="card-button">Join Now</button>
+                    <h3 className="card-title">{t('fanClub.exclusiveContent')}</h3>
+                    <p className="card-text">{t('fanClub.exclusiveContentDesc')}</p>
+                    <button onClick={handleJoinNow} className="card-button">{t('fanClub.joinButton')}</button>
                   </div>
                 </FanClubCard>
 
                 <FanClubCard>
                   <img src={fan2} alt="Henry Cavill at Fan Event" className="card-image" />
                   <div className="card-content">
-                    <h3 className="card-title">Member Events</h3>
-                    <p className="card-text">Be the first to know about exclusive fan events, Q&A sessions, and special appearances by Henry.</p>
-                    <button onClick={handleJoinNow} className="card-button">Join Now</button>
+                    <h3 className="card-title">{t('fanClub.memberEvents')}</h3>
+                    <p className="card-text">{t('fanClub.memberEventsDesc')}</p>
+                    <button onClick={handleJoinNow} className="card-button">{t('fanClub.joinButton')}</button>
                   </div>
                 </FanClubCard>
 
                 <FanClubCard>
                   <img src={fan1} alt="Henry Cavill with Fans" className="card-image" />
                   <div className="card-content">
-                    <h3 className="card-title">Merchandise</h3>
-                    <p className="card-text">Access to limited edition merchandise and early releases available only to fan club members.</p>
-                    <button onClick={handleJoinNow} className="card-button">Join Now</button>
+                    <h3 className="card-title">{t('fanClub.merchandise')}</h3>
+                    <p className="card-text">{t('fanClub.merchandiseDesc')}</p>
+                    <button onClick={handleJoinNow} className="card-button">{t('fanClub.joinButton')}</button>
                   </div>
                 </FanClubCard>
               </FanClubGrid></>
@@ -834,15 +827,12 @@ const Home = () => {
         <FooterInner>
           <FooterGrid>
             <FooterSection>
-              <h4>About Us</h4>
-              <p>
-                The Cavill Trust Foundation supports initiatives in veteran welfare, wildlife conservation,
-                and community development. We believe small acts can create powerful change.
-              </p>
+              <h4>{t('footer.aboutTitle')}</h4>
+              <p>{t('footer.aboutText')}</p>
             </FooterSection>
 
             <FooterSection>
-              <h4>Contact</h4>
+              <h4>{t('footer.contactTitle')}</h4>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <li style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                   <i className="fas fa-envelope" style={{ marginRight: '10px', color: '#f59e0b', width: '20px', textAlign: 'center' }}></i>
@@ -852,24 +842,24 @@ const Home = () => {
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center' }}>
                   <i className="fas fa-map-marker-alt" style={{ marginRight: '10px', color: '#f59e0b', width: '20px', textAlign: 'center' }}></i>
-                  <span>London, United Kingdom</span>
+                  <span>{t('footer.location')}</span>
                 </li>
               </ul>
             </FooterSection>
 
             <FooterSection>
-              <h4>Quick Links</h4>
+              <h4>{t('footer.linksTitle')}</h4>
               <ul>
-                <li><a href="#donate">Donate</a></li>
-                <li><a href="#programs">Programs</a></li>
-                <li><a href="#impact">Impact</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#donate">{t('nav.donate')}</a></li>
+                <li><a href="#programs">{t('nav.programs')}</a></li>
+                <li><a href="#impact">{t('nav.impact')}</a></li>
+                <li><a href="#contact">{t('nav.contact')}</a></li>
               </ul>
             </FooterSection>
           </FooterGrid>
 
           <SponsorsSection>
-            <h3>Our Sponsors</h3>
+            <h3>{t('footer.sponsors')}</h3>
             <div className="sponsors-grid">
               <img src={durrellLogo} alt="" />
               <img src={royalLogo} alt="" />
@@ -879,10 +869,10 @@ const Home = () => {
 
           <FooterBottom>
             <div>
-              © 2025 Cavill Trust Foundation
+              {t('footer.copyright')}
             </div>
             <div style={{ opacity: 0.85 }}>
-              Registered charity. All rights reserved.
+              {t('footer.rights')}
             </div>
           </FooterBottom>
         </FooterInner>
