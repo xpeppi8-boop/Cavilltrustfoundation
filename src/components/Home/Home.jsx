@@ -4,15 +4,17 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import SlidingBanner from '../Animations/SlidingBanner';
 import ImageCarousel from '../Carousel/ImageCarousel';
-import durrellLogo from '../../assets/durell.png';
-import royalLogo from '../../assets/royal.png';
-import dcLogo from '../../assets/dc.png';
-import cavill1 from '../../assets/cavill1.jpg';
-import cavill2 from '../../assets/cavill2.jpg';
-import cavill3 from '../../assets/cavill3.jpg';
-import cavill5 from '../../assets/cavill5.jpg';
-import fan1 from '../../assets/fan4.jpg';
-import fan2 from '../../assets/fan5.jpg';
+// Logo images are now served from the public directory
+const durrellLogo = '/images/durell.png';
+const royalLogo = '/images/royal.png';
+const dcLogo = '/images/dc.png';
+// Images are now served from the public directory
+const cavill1 = '/images/cavill1.jpg';
+const cavill2 = '/images/cavill2.jpg';
+const cavill3 = '/images/cavill3.jpg';
+const cavill5 = '/images/cavill5.jpg';
+const fan1 = '/images/fan4.jpg';
+const fan2 = '/images/fan5.jpg';
 
 // Load font-awesome for icons
 const loadFontAwesome = () => {

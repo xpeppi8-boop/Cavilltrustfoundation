@@ -3,10 +3,11 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from '@emotion/styled';
-import cavill6 from '../../assets/cavill6.jpeg';
-import cavill7 from '../../assets/cavill7.jpeg';
-import cavill8 from '../../assets/cavill8.jpeg';
-import cavill9 from '../../assets/cavill9.jpeg';
+// Images are now served from the public directory
+const cavill6 = '/images/cavill6.jpeg';
+const cavill7 = '/images/cavill7.jpeg';
+const cavill8 = '/images/cavill8.jpeg';
+const cavill9 = '/images/cavill9.jpeg';
 
 // Dynamically import slick-carousel styles
 const importSlick = () => {
