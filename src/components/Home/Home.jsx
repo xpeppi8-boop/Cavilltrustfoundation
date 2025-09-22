@@ -39,6 +39,7 @@ const HomeContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #ffffff;
   
   * {
     box-sizing: border-box;
@@ -290,9 +291,9 @@ const ReasonCard = styled.div`
   }
 
   .desc {
-    color: #4b5563;
-    font-size: 0.98rem;
-    line-height: 1.6;
+    color:rgb(138, 143, 155); /* Slightly lighter grey for better readability */
+    font-size: 0.9rem; /* Slightly smaller font size */
+    line-height: 1.5;
   }
 `;
 
