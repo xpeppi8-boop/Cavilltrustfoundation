@@ -298,44 +298,6 @@ const ReasonCard = styled.div`
   }
 `;
 
-const reasons = [
-  {
-    title: t('reasons.integrity.title'),
-    desc: t('reasons.integrity.desc'),
-    icon: 'fa-shield-alt',
-    color: '#1e3a8a',
-  },
-  {
-    title: t('reasons.commitment.title'),
-    desc: t('reasons.commitment.desc'),
-    icon: 'fa-hand-holding-heart',
-    color: '#0ea5e9',
-  },
-  {
-    title: t('reasons.heroes.title'),
-    desc: t('reasons.heroes.desc'),
-    icon: 'fa-paw',
-    color: '#16a34a',
-  },
-  {
-    title: t('reasons.impact.title'),
-    desc: t('reasons.impact.desc'),
-    icon: 'fa-globe',
-    color: '#f59e0b',
-  },
-  {
-    title: t('reasons.transparency.title'),
-    desc: t('reasons.transparency.desc'),
-    icon: 'fa-scale-balanced',
-    color: '#8b5cf6',
-  },
-  {
-    title: t('reasons.passion.title'),
-    desc: t('reasons.passion.desc'),
-    icon: 'fa-fire',
-    color: '#ef4444',
-  },
-];
 
 const SectionHeading = styled.h2`
   text-align: center;
@@ -614,6 +576,45 @@ const Home = () => {
   const [showDonateDetails, setShowDonateDetails] = useState(false);
   const [donorEmail, setDonorEmail] = useState('');
   const [donationComplete, setDonationComplete] = useState(false);
+
+  const reasons = [
+    {
+      title: t('reasons.integrity.title'),
+      desc: t('reasons.integrity.desc'),
+      icon: 'fa-shield-alt',
+      color: '#1e3a8a',
+    },
+    {
+      title: t('reasons.commitment.title'),
+      desc: t('reasons.commitment.desc'),
+      icon: 'fa-hand-holding-heart',
+      color: '#0ea5e9',
+    },
+    {
+      title: t('reasons.heroes.title'),
+      desc: t('reasons.heroes.desc'),
+      icon: 'fa-paw',
+      color: '#16a34a',
+    },
+    {
+      title: t('reasons.impact.title'),
+      desc: t('reasons.impact.desc'),
+      icon: 'fa-globe',
+      color: '#f59e0b',
+    },
+    {
+      title: t('reasons.transparency.title'),
+      desc: t('reasons.transparency.desc'),
+      icon: 'fa-scale-balanced',
+      color: '#8b5cf6',
+    },
+    {
+      title: t('reasons.passion.title'),
+      desc: t('reasons.passion.desc'),
+      icon: 'fa-fire',
+      color: '#ef4444',
+    },
+  ];
   
   const handleJoinNow = () => {
     navigate('/fan');
