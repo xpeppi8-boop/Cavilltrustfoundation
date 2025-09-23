@@ -29,7 +29,7 @@ const LanguageSelectorContainer = styled.div`
 `;
 
 const Select = styled.select`
-  padding: 10px 7px;
+  padding: 10px 
   border-radius: 50px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: rgba(138, 143, 155, 0.2);
