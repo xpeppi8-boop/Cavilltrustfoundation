@@ -53,7 +53,7 @@ const BannerContainer = styled.div`
 `;
 
 const SlideBox = styled.div`
-  height: 70px;   
+  height: 70px;  /* Increased from 66px */
   color: #1e3a8a;
   display: inline-block;
   width: 100%;
@@ -115,7 +115,7 @@ const BitBox = styled.div`
   width: 200px;
   min-width: 200px;
   border-right: 1px solid rgb(102, 59, 48);
-  height: 100px;  /* Increased from 80px */
+  height: 90px;  /* Increased from 80px */
   display: inline-flex;
   flex-direction: column; 
   align-items: center;
