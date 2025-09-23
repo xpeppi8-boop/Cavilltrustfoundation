@@ -253,7 +253,6 @@ const ReasonsGrid = styled.div`
 
 const ReasonCard = styled.div`
   background: #ffffff;
-  border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 18px 16px;
   box-shadow: 0 6px 14px rgba(30, 58, 138, 0.08);

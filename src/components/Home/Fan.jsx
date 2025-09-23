@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
-import cavill9 from '../../assets/cavill9.jpeg';
+import cavill9 from '../../assets/cavill9.jpg';
 
 const FanContainer = styled.div`
   font-family: 'Poppins', sans-serif;
@@ -58,25 +58,84 @@ const PricingGrid = styled.div`
 `;
 
 const PricingCard = styled.div`
-  background: rgba(31, 41, 55, 0.8);
-  border-radius: 12px;
-  padding: 2rem;
+  background: linear-gradient(145deg, rgba(31, 41, 55, 0.9), rgba(17, 24, 39, 0.9));
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f59e0b, #f97316);
+  }
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-color: rgba(245, 158, 11, 0.3);
   }
+  
+  ${props => props.isPremium && `
+    border: 2px solid #f59e0b;
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+    
+    &::before {
+      height: 6px;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
+      background-size: 200% auto;
+      animation: shine 2s linear infinite;
+    }
+    
+    @keyframes shine {
+      to {
+        background-position: 200% center;
+      }
+    }
+  `}
 `;
 
 const Price = styled.div`
-  font-size: 3rem;
-  font-weight: bold;
-  color: #f59e0b;
-  margin: 1rem 0;
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, #f59e0b, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 1.5rem 0;
+  position: relative;
+  display: inline-block;
+  
+  &::before {
+    content: '$';
+    font-size: 1.5rem;
+    position: absolute;
+    left: -1.2rem;
+    top: 0.5rem;
+    background: linear-gradient(45deg, #f59e0b, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    border-radius: 3px;
+  }
 `;
 
 const CardTitle = styled.h2`
@@ -109,25 +168,76 @@ const JoinButton = styled.button`
   background: linear-gradient(45deg, #f59e0b, #f97316);
   color: white;
   border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 8px;
+  padding: 1rem 2rem;
+  border-radius: 50px;
   font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 1.5rem;
   width: 100%;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(45deg, #f97316, #f59e0b);
+    transition: all 0.4s ease;
+    z-index: -1;
+    opacity: 0;
+  }
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.5);
+    
+    &::before {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(245, 158, 11, 0.5);
   }
   
   &:disabled {
-    background: #6b7280;
+    background: #4b5563;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+    color: #9ca3af;
+    
+    &::before {
+      display: none;
+    }
   }
+  
+  ${props => props.isPremium && `
+    background: linear-gradient(45deg, #f59e0b, #fbbf24);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    
+    &::after {
+      content: '⭐';
+      margin-left: 8px;
+      display: inline-block;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+  `}
 `;
 
 const ModalOverlay = styled.div`
@@ -145,21 +255,63 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background: #1f2937;
-  padding: 2rem;
-  border-radius: 12px;
+  background: linear-gradient(145deg, #1f2937, #111827);
+  padding: 2.5rem;
+  border-radius: 16px;
   width: 90%;
   max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f59e0b, #f97316);
+    border-radius: 4px 4px 0 0;
+  }
   
   form {
     display: ${props => props.showPayment ? 'none' : 'block'};
+    animation: fadeIn 0.4s ease-out;
   }
   
   .payment-methods {
     display: ${props => props.showPayment ? 'block' : 'none'};
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  h2 {
+    color: #f3f4f6;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #f59e0b, #f97316);
+      border-radius: 3px;
+    }
   }
 `;
 
@@ -179,28 +331,55 @@ const CloseButton = styled.button`
 `;
 
 const FormGroup = styled.div`
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
+  position: relative;
   
   label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
     color: #e5e7eb;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
   }
   
   input, select {
     width: 100%;
-    padding: 0.8rem;
-    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
     border: 1px solid #4b5563;
-    background: #374151;
+    background: rgba(31, 41, 55, 0.7);
     color: #f3f4f6;
     font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    
+    &::placeholder {
+      color: #9ca3af;
+      opacity: 0.7;
+    }
     
     &:focus {
       outline: none;
       border-color: #f59e0b;
-      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+      background: rgba(31, 41, 55, 0.9);
     }
+    
+    &:disabled {
+      background: rgba(31, 41, 55, 0.4);
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  }
+  
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%239ca3af' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    padding-right: 2.5rem;
   }
 `;
 
@@ -208,17 +387,59 @@ const SubmitButton = styled.button`
   background: linear-gradient(45deg, #10b981, #059669);
   color: white;
   border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 8px;
+  padding: 1rem 2rem;
+  border-radius: 50px;
   font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(45deg, #059669, #10b981);
+    transition: all 0.4s ease;
+    z-index: -1;
+    opacity: 0;
+  }
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+    
+    &::before {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+  }
+  
+  &:disabled {
+    background: #4b5563;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    color: #9ca3af;
+    
+    &::before {
+      display: none;
+    }
   }
 `;
 
@@ -307,7 +528,7 @@ const Fan = () => {
         'Exclusive merchandise package',
         'Priority event access',
       ],
-      availableWorldwide: false,
+      availableWorldwide: true, // Changed to true to enable modal for all plans
     },
   ];
 
@@ -349,13 +570,10 @@ const Fan = () => {
   };
 
   const continents = [
-    'Africa',
-    'Antarctica',
-    'Asia',
-    'Europe',
     'North America',
-    'Oceania',
-    'South America'
+    'South America',
+    'Asia',
+    'Europe'
   ];
 
   return (
@@ -369,17 +587,37 @@ const Fan = () => {
         
         <PricingGrid>
           {plans.map((plan) => (
-            <PricingCard key={plan.id}>
+            <PricingCard key={plan.id} isPremium={plan.price === 1000}>
               <CardTitle>{plan.title}</CardTitle>
-              <Price>${plan.price}</Price>
+              <Price>{plan.price}</Price>
               <BenefitsList>
                 {plan.benefits.map((benefit, index) => (
-                  <li key={index}>{benefit}</li>
+                  <li key={index}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                      <span style={{ 
+                        display: 'inline-flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        width: '20px',
+                        height: '20px',
+                        background: 'rgba(16, 185, 129, 0.1)',
+                        borderRadius: '50%',
+                        marginRight: '10px',
+                        color: '#10b981',
+                        fontSize: '12px',
+                        flexShrink: 0
+                      }}>
+                        ✓
+                      </span>
+                      {benefit}
+                    </span>
+                  </li>
                 ))}
               </BenefitsList>
               <JoinButton 
                 onClick={() => handleJoinClick(plan)}
                 disabled={!plan.availableWorldwide}
+                isPremium={plan.price === 1000}
               >
                 {plan.availableWorldwide ? 'Join Now' : 'Contact for Availability'}
               </JoinButton>

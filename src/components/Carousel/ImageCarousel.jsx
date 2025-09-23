@@ -4,10 +4,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from '@emotion/styled';
 // Images are now served from the public directory
+const cavill4 = '/images/cavill4.jpg';
 const cavill6 = '/images/cavill6.jpeg';
 const cavill7 = '/images/cavill7.jpeg';
-const cavill8 = '/images/cavill8.jpeg';
-const cavill9 = '/images/cavill9.jpeg';
+const cavill10 = '/images/cavill10.jpg';
 
 // Dynamically import slick-carousel styles
 const importSlick = () => {
@@ -65,12 +65,12 @@ const Slide = styled.div`
   }
 `;
 
-// Sample carousel data - replace with your actual images and content
+// Carousel images
 const carouselItems = [
-  { id: 1, image: cavill6 },
-  { id: 2, image: cavill7 },
-  { id: 3, image: cavill8 },
-  { id: 4, image: cavill9 },
+  { id: 1, image: cavill4 },
+  { id: 2, image: cavill6 },
+  { id: 3, image: cavill7 },
+  { id: 4, image: cavill10 },
 ];
 
 const ImageCarousel = () => {

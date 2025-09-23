@@ -1,19 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
+
+const fadeOut = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
+`;
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
 
 const LanguageSelectorContainer = styled.div`
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 1000;
+  opacity: ${props => props.isVisible ? 1 : 0};
+  animation: ${props => props.isVisible ? fadeIn : fadeOut} 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  
+  &:hover {
+    opacity: 1 !important;
+    animation: none;
+  }
 `;
 
 const Select = styled.select`
-  padding: 10px 20px;
+  padding: 10px 7px;
   border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background-color: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(138, 143, 155, 0.2);
+  backdrop-filter: blur(5px);
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
@@ -58,6 +78,32 @@ const Select = styled.select`
 
 const LanguageSelector = () => {
   const { i18n } = useTranslation();
+  const [isVisible, setIsVisible] = useState(true);
+  
+  useEffect(() => {
+    // Hide after 7 seconds
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 7000);
+    
+    // Show again when language is changed
+    const handleLanguageChange = () => {
+      setIsVisible(true);
+      clearTimeout(timer);
+      
+      // Hide again after 7 seconds
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 7000);
+    };
+    
+    i18n.on('languageChanged', handleLanguageChange);
+    
+    return () => {
+      clearTimeout(timer);
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
 
   const changeLanguage = (event) => {
     i18n.changeLanguage(event.target.value);
@@ -79,11 +125,12 @@ const LanguageSelector = () => {
   }, [i18n]);
 
   return (
-    <LanguageSelectorContainer>
+    <LanguageSelectorContainer isVisible={isVisible}>
       <Select
         value={i18n.language}
         onChange={changeLanguage}
         aria-label="Select language"
+        onMouseEnter={() => setIsVisible(true)}
       >
         <option value="en">English</option>
         <option value="ru">Русский</option>
