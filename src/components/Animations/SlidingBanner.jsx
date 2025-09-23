@@ -53,7 +53,7 @@ const BannerContainer = styled.div`
 `;
 
 const SlideBox = styled.div`
-  height: 70px;  /* Increased from 66px */
+  height: 70px;   
   color: #1e3a8a;
   display: inline-block;
   width: 100%;
