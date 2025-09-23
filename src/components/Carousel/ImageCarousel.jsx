@@ -80,13 +80,17 @@ const ImageCarousel = () => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 500,
+    speed: 150,  // Faster transition speed (was 500)
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,  // Faster slide change (was 5000)
     pauseOnHover: true,
-    arrows: false
+    arrows: false,
+    swipeToSlide: true,   // Enable swipe to slide
+    draggable: true,      // Enable dragging on desktop
+    fade: false,          // Disable fade effect for better performance
+    cssEase: 'ease-in-out' // Smoother easing
   };
 
   return (
