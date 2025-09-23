@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import cavill9 from '../../assets/cavill9.jpg';
+import SlidingBanner from '../Animations/SlidingBanner';
 
 const FanContainer = styled.div`
   font-family: 'Poppins', sans-serif;
@@ -578,6 +579,7 @@ const Fan = () => {
 
   return (
     <FanContainer>
+      <SlidingBanner />
       <HeroImage>
         <HeroTitle>Join the Fan Club</HeroTitle>
       </HeroImage>
