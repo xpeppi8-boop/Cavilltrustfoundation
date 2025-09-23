@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import SlidingBanner from '../Animations/SlidingBanner';
 import ImageCarousel from '../Carousel/ImageCarousel';
+import CopyNotification from '../UI/CopyNotification';
 // Logo images are now served from the public directory
 const durrellLogo = '/images/durell.png';
 const royalLogo = '/images/royal.png';
@@ -577,6 +578,8 @@ const Home = () => {
   const [showDonateDetails, setShowDonateDetails] = useState(false);
   const [donorEmail, setDonorEmail] = useState('');
   const [donationComplete, setDonationComplete] = useState(false);
+  const [showCopyNotification, setShowCopyNotification] = useState(false);
+  const [copyTimeout, setCopyTimeout] = useState(null);
 
   const reasons = [
     {
@@ -621,7 +624,7 @@ const Home = () => {
     navigate('/fan');
   };
 
-  const copyToClipboard = async (text) => {
+  const copyToClipboard = useCallback(async (text) => {
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(text);
@@ -633,14 +636,33 @@ const Home = () => {
         document.execCommand('copy');
         document.body.removeChild(ta);
       }
-      alert('Copied to clipboard');
+      
+      // Clear any existing timeout
+      if (copyTimeout) {
+        clearTimeout(copyTimeout);
+      }
+      
+      // Show notification
+      setShowCopyNotification(true);
+      
+      // Hide notification after 2 seconds
+      const timeout = setTimeout(() => {
+        setShowCopyNotification(false);
+      }, 2000);
+      
+      setCopyTimeout(timeout);
+      
+      return true;
     } catch (e) {
-      alert('Unable to copy');
+      console.error('Failed to copy:', e);
+      return false;
     }
-  };
+  }, [copyTimeout]);
   
   return (
-    <HomeContainer>
+    <>
+      <CopyNotification show={showCopyNotification} />
+      <HomeContainer>
       <SlidingBanner />
       
       <ContentWrapper>
@@ -713,13 +735,15 @@ const Home = () => {
                     </div>
                   </Progress>
 
-                  <p className="lead" style={{ fontStyle: 'italic' }}>
+                  <p className="lead" style={{ fontStyle: 'italic', marginBottom: '20px' }}>
                     "{t('support.quote')}"
                   </p>
 
-                  <DonateButton type="button" aria-label={t('support.donateButton')} onClick={() => setShowDonateDetails(true)}>
-                    {t('support.donateButton')}
-                  </DonateButton>
+                  <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                    <DonateButton type="button" aria-label={t('support.donateButton')} onClick={() => setShowDonateDetails(true)}>
+                      {t('support.donateButton')}
+                    </DonateButton>
+                  </div>
                 </>
               ) : (
                 <>
@@ -756,12 +780,15 @@ const Home = () => {
                         </div>
                       </StatsRow>
 
-                      {/* Email input moved below cards */}
-                      <div className="stat" style={{ marginTop: 12, alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div className="left" style={{ gap: 10 }}>
-                          <span className="label">{t('donation.emailLabel')}</span>
-                        </div>
-                        <EmailInput type="email" placeholder={t('donation.emailPlaceholder')} aria-label={t('donation.emailLabel')} value={donorEmail} onChange={(e) => setDonorEmail(e.target.value)} />
+                      {/* Email input */}
+                      <div className="stat" style={{ marginTop: 12, padding: '12px 14px' }}>
+                        <EmailInput 
+                          type="email" 
+                          placeholder={t('donation.emailPlaceholder')} 
+                          aria-label="Email address for donation receipt" 
+                          value={donorEmail} 
+                          onChange={(e) => setDonorEmail(e.target.value)} 
+                        />
                       </div>
 
                       <div style={{ display: 'flex', marginTop: 12, gap: 10, justifyContent: 'flex-end' }}>
@@ -881,7 +908,8 @@ const Home = () => {
       </Footer>
 
       
-    </HomeContainer>
+      </HomeContainer>
+    </>
   );
 };
 
