@@ -81,8 +81,7 @@ const TopNav = styled.div`
   align-items: center;
   justify-content: flex-start;
   font-family: 'Inter', sans-serif;
-  min-height: 72px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 72px; 
 
   .brand {
     display: flex;
