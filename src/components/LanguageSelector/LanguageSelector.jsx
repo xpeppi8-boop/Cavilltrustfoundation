@@ -4,33 +4,26 @@ import styled from '@emotion/styled';
 
 const LanguageSelectorContainer = styled.div`
   position: fixed;
-  top: 80px;  /* Increased from 20px to 80px */
+  bottom: 20px;
   right: 20px;
   z-index: 1000;
-  
-  @media (max-width: 768px) {
-    top: 70px;  /* Increased from 15px to 70px */
-    right: 15px;
-  }
 `;
 
 const Select = styled.select`
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(0, 0, 0, 0.4);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: rgba(30, 41, 59, 0.9);
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   outline: none;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   appearance: none;
-  padding-right: 36px;
+  padding-right: 40px;
   position: relative;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   
   &::after {
     content: '▼';
@@ -45,9 +38,10 @@ const Select = styled.select`
   }
   
   &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    background-color: rgba(30, 58, 138, 0.9);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
   }
   
   &:focus {
