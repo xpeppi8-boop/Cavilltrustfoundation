@@ -673,7 +673,7 @@ const Home = () => {
           ))}
         </ReasonsGrid>
 
-        <SectionHeading>Why Support Us?</SectionHeading>
+        <SectionHeading>Support Our Foundation</SectionHeading>
         {(() => {
           const goal = 30000;
           const raised = 14760;

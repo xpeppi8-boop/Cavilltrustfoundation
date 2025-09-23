@@ -53,7 +53,7 @@ const BannerContainer = styled.div`
 `;
 
 const SlideBox = styled.div`
-  height: 66px;
+  height: 86px;  /* Increased from 66px */
   color: #1e3a8a;
   display: inline-block;
   width: 100%;
@@ -116,14 +116,14 @@ const BitBox = styled.div`
   width: 200px;
   min-width: 200px;
   border-right: 1px solid rgb(102, 59, 48);
-  height: 80px;
+  height: 100px;  /* Increased from 80px */
   display: inline-flex;
   flex-direction: column; 
   align-items: center;
   text-align: center;
   font-size: 12px;
   margin: 0;
-  padding: 8px 6px;
+  padding: 10px 8px;  /* Increased padding for better spacing */
   color: #fff;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -140,7 +140,7 @@ const BitBox = styled.div`
   .title {
     font-weight: 700;
     margin-bottom: 4px;
-    font-size: 15px;
+    font-size: 14px;  /* Slightly reduced font size to fit more text */
     line-height: 1.2;
   }
   
