@@ -190,7 +190,7 @@ const Progress = styled.div`
 `;
 
 const DonateButton = styled.button`
-  margin: 10px 0 0 auto;
+  margin: 10px auto 0;
   background: linear-gradient(135deg, #7b5a3a, #b8860b 60%, #d4af37);
   color: #fff;
   border: none;
