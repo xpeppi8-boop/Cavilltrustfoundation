@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import styled from '@emotion/styled';
 import cavill9 from '../../assets/cavill9.jpg';
 import SlidingBanner from '../Animations/SlidingBanner';
+
+// Logo images from public directory
+const durrellLogo = '/images/durell.png';
+const royalLogo = '/images/royal.png';
+const dcLogo = '/images/dc.png';
 
 const FanContainer = styled.div`
   font-family: 'Poppins', sans-serif;
@@ -156,11 +162,18 @@ const BenefitsList = styled.ul`
     display: flex;
     align-items: center;
     
-    &::before {
-      content: '✓';
-      color: #10b981;
-      margin-right: 0.8rem;
-      font-weight: bold;
+    /* Hide the default list bullet */
+    list-style-type: none;
+    
+    /* Only show the custom checkmark */
+    span {
+      display: inline-flex;
+      align-items: center;
+      
+      /* Remove any default padding/margin that might cause double checkmarks */
+      &::before {
+        display: none;
+      }
     }
   }
 `;
@@ -577,11 +590,13 @@ const Fan = () => {
     'Europe'
   ];
 
+  const { t } = useTranslation();
+
   return (
     <FanContainer>
       <SlidingBanner />
       <HeroImage>
-        <HeroTitle>Join the Fan Club</HeroTitle>
+        <HeroTitle>{t('fan.joinFanClub')}</HeroTitle>
       </HeroImage>
       
       <div className="content-wrapper">
@@ -804,8 +819,146 @@ const Fan = () => {
           </ModalContent>
         </ModalOverlay>
       )}
+
+      <Footer>
+        <FooterInner>
+          <FooterGrid>
+            <FooterSection>
+              <h4>{t('footer.aboutTitle')}</h4>
+              <p>{t('footer.aboutText')}</p>
+            </FooterSection>
+
+            <FooterSection>
+              <h4>{t('footer.contactTitle')}</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                <li style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                  <i className="fas fa-envelope" style={{ marginRight: '10px', color: '#f59e0b', width: '20px', textAlign: 'center' }}></i>
+                  <a href="mailto:cavilltrustfoundation@gmail.com" style={{ color: '#e5e7eb', textDecoration: 'none', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color='#f59e0b'} onMouseOut={(e) => e.currentTarget.style.color='#e5e7eb'}>
+                    cavilltrustfoundation@gmail.com
+                  </a>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center' }}>
+                  <i className="fas fa-map-marker-alt" style={{ marginRight: '10px', color: '#f59e0b', width: '20px', textAlign: 'center' }}></i>
+                  <span>{t('footer.location')}</span>
+                </li>
+              </ul>
+            </FooterSection>
+
+            <FooterSection>
+              <h4>{t('footer.linksTitle')}</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                <li style={{ marginBottom: '8px' }}><a href="#donate" style={{ color: '#e5e7eb', textDecoration: 'none', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color='#f59e0b'} onMouseOut={(e) => e.currentTarget.style.color='#e5e7eb'}>{t('nav.donate')}</a></li>
+                <li style={{ marginBottom: '8px' }}><a href="#programs" style={{ color: '#e5e7eb', textDecoration: 'none', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color='#f59e0b'} onMouseOut={(e) => e.currentTarget.style.color='#e5e7eb'}>{t('nav.programs')}</a></li>
+                <li style={{ marginBottom: '8px' }}><a href="#impact" style={{ color: '#e5e7eb', textDecoration: 'none', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color='#f59e0b'} onMouseOut={(e) => e.currentTarget.style.color='#e5e7eb'}>{t('nav.impact')}</a></li>
+                <li><a href="#contact" style={{ color: '#e5e7eb', textDecoration: 'none', transition: 'color 0.2s ease' }} onMouseOver={(e) => e.currentTarget.style.color='#f59e0b'} onMouseOut={(e) => e.currentTarget.style.color='#e5e7eb'}>{t('nav.contact')}</a></li>
+              </ul>
+            </FooterSection>
+          </FooterGrid>
+
+          <SponsorsSection>
+            <h3>{t('footer.sponsors')}</h3>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+              <img src={durrellLogo} alt="Durrell Wildlife Conservation Trust" style={{ height: '40px', objectFit: 'contain' }} />
+              <img src={royalLogo} alt="Royal Marines Charity" style={{ height: '40px', objectFit: 'contain' }} />
+              <img src={dcLogo} alt="DC Entertainment" style={{ height: '40px', objectFit: 'contain' }} />
+            </div>
+          </SponsorsSection>
+
+          <FooterBottom>
+            <div>
+              {t('footer.copyright')}
+            </div>
+            <div style={{ opacity: 0.85 }}>
+              {t('footer.rights')}
+            </div>
+          </FooterBottom>
+        </FooterInner>
+      </Footer>
     </FanContainer>
   );
 };
+
+// Footer Styled Components
+const Footer = styled.footer`
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 4rem 0 0;
+  margin-top: 4rem;
+  width: 100%;
+`;
+
+const FooterInner = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+`;
+
+const FooterGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+`;
+
+const FooterSection = styled.div`
+  h4 {
+    color: #f59e0b;
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+  }
+  
+  p {
+    line-height: 1.6;
+    color: #d1d5db;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    li {
+      margin-bottom: 0.75rem;
+      
+      a {
+        color: #e5e7eb;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        
+        &:hover {
+          color: #f59e0b;
+        }
+      }
+    }
+  }
+`;
+
+const SponsorsSection = styled.div`
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid #374151;
+  border-bottom: 1px solid #374151;
+  margin: 2rem 0;
+  
+  h3 {
+    color: #f59e0b;
+    margin-bottom: 1.5rem;
+  }
+`;
+
+const FooterBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  border-top: 1px solid #374151;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+`;
 
 export default Fan;

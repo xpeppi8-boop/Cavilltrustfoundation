@@ -5,9 +5,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from '@emotion/styled';
 // Images are now served from the public directory
 const cavill4 = '/images/cavill4.jpg';
-const cavill6 = '/images/cavill6.jpeg';
-const cavill7 = '/images/cavill7.jpeg';
-const cavill10 = '/images/cavill10.jpg';
+const cavill6 = '/images/cavill6.jpg';
+const cavill7 = '/images/cavill7.jpg';
+const cavill10 = '/images/cavill10.jpeg';
 
 // Dynamically import slick-carousel styles
 const importSlick = () => {

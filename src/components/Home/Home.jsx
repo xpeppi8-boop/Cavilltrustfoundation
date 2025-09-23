@@ -291,9 +291,10 @@ const ReasonCard = styled.div`
   }
 
   .desc {
-    color:rgb(138, 143, 155); /* Slightly lighter grey for better readability */
-    font-size: 0.9rem; /* Slightly smaller font size */
-    line-height: 1.5;
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    font-weight: 300;
   }
 `;
 
@@ -527,11 +528,12 @@ const FanClubCard = styled.div`
   }
   
   .card-text {
-    color: #4b5563;
+    color: #6b7280;
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 20px;
     flex: 1;
+    font-weight: 300;
   }
   
   .card-button {
@@ -643,10 +645,10 @@ const Home = () => {
       
       <ContentWrapper>
         <WelcomeSection>
-          <h1>{t('hero.welcome')}</h1>
+          <h1>Welcome to the Cavill Trust Foundation</h1>
           <p>{t('hero.subtitle')}</p>
         </WelcomeSection>
-        <SectionHeading>{t('support.title')}</SectionHeading>
+        <SectionHeading>Why Support Us?</SectionHeading>
         
         <ImageCarousel />
 
@@ -671,7 +673,7 @@ const Home = () => {
           ))}
         </ReasonsGrid>
 
-        <SectionHeading>{t('support.title')}</SectionHeading>
+        <SectionHeading>Why Support Us?</SectionHeading>
         {(() => {
           const goal = 30000;
           const raised = 14760;
